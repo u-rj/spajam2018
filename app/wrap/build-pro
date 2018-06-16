@@ -1,0 +1,8 @@
+#バージョン100x.x.xからx.x.xに変更
+sed -i '' -e 's/version=\"[0-9]\{3\}/version="/' config.xml
+
+cordova-icon
+cordova build --release
+
+#バージョンx.x.xから100x.x.xに変更
+sed -i '' -e 's/version=\"/version="100/' config.xml

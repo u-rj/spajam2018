@@ -1,0 +1,13 @@
+{
+  "background_color": "#FFF",
+  "display": "standalone",
+  "name": "STARMINE",
+  "short_name": "STARMINE",
+  "version": "jp.starmine.starmine",
+  "description": "Project Description",
+  "author": "Project Author",
+  "icons": [],
+  "orientation": "portrait",
+  "start_url": "index.html",
+  "theme_color": "#FFFFFF"
+}

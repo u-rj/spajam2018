@@ -1,0 +1,3 @@
+sed -i '' -e 's/>100/>/' ../wrap/platforms/ios/STARMINE/STARMINE-Info.plist
+sed -i '' -e 's/>200/>/' ../wrap/platforms/ios/STARMINE/STARMINE-Info.plist
+open ../wrap/platforms/ios/STARMINE.xcodeproj

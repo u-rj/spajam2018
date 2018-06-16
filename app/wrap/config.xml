@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="jp.starmine.starmine" version="1000.2.3" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>STARMINE</name>
+    <preference name="Orientation" value="portrait" />
+    <preference name="AutoHideSplashScreen" value="false" />
+    <preference name="ShowSplashScreenSpinner" value="false" />
+    <description>
+    Project Description
+  </description>
+    <author email="admin@example.com" href="http://example.com">
+    Project Author
+  </author>
+    <content src="index.html" />
+    <access origin="*" />
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+    <allow-intent href="tel:*" />
+    <allow-intent href="sms:*" />
+    <allow-intent href="mailto:*" />
+    <allow-intent href="geo:*" />
+    <platform name="android">
+        <allow-intent href="market:*" />
+    </platform>
+    <platform name="ios">
+        <allow-intent href="itms:*" />
+        <allow-intent href="itms-apps:*" />
+    </platform>
+    <plugin name="cordova-plugin-whitelist" spec="1" />
+    <plugin name="cordova-plugin-inappbrowser" spec="^2.0.2" />
+    <plugin name="cordova-plugin-statusbar" spec="^2.4.1" />
+    <preference name="StatusBarOverlaysWebView" value="true" />
+    <preference name="StatusBarBackgroundColor" value="#FFFFFF" />
+    <preference name="StatusBarStyle" value="lightcontent" />
+    <plugin name="cordova-plugin-cache-clear" spec="^1.3.7" />
+    <plugin name="cordova-plugin-customurlscheme" spec="^4.3.0">
+        <variable name="URL_SCHEME" value="starmine" />
+    </plugin>
+    <plugin name="cordova-plugin-dialogs" spec="^2.0.1" />
+    <plugin name="cordova-plugin-app-version" spec="^0.1.9" />
+    <plugin name="cordova-plugin-app-preferences" spec="^0.99.3" />
+    <plugin name="cordova-plugin-splashscreen" spec="~5.0.2" />
+    <plugin name="cordova-plugin-actionsheet" spec="^2.3.3" />
+    <engine name="browser" spec="^5.0.3" />
+    <engine name="ios" spec="^4.5.4" />
+</widget>
