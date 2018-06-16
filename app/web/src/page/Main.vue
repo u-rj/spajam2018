@@ -1,6 +1,13 @@
 <template>
-  <div>
+  <div class="main">
     {{position}}
+
+    <div class="toolbar">
+      <div @click="$router.push({name: 'main'})"><img src="../assets/toolbar1.png"></div>
+      <div @click="$router.push({name: 'area'})"><img src="../assets/toolbar2.png"></div>
+      <div @click="$router.push({name: 'match'})"><img src="../assets/toolbar3.png"></div>
+      <div @click="logout"><img src="../assets/toolbar4.png"></div>
+    </div>
   </div>
 </template>
 
@@ -12,15 +19,36 @@ export default {
     }
   },
   mounted () {
-    setInterval(() => {
-      navigator.geolocation.getCurrentPosition((position) => {
-        this.position = 'Latitude: ' + position.coords.latitude + '\n' + 'Longitude: ' + position.coords.longitude + '\n' + 'Altitude: ' + position.coords.altitude + '\n' + 'Accuracy: ' + position.coords.accuracy + '\n' + 'Altitude Accuracy: ' + position.coords.altitudeAccuracy + '\n' + 'Heading: ' + position.coords.heading + '\n' + 'Speed: ' + position.coords.speed + '\n' + 'Timestamp: ' + position.timestamp + '\n'
-      }, () => {
-        this.position = 'error!!'
-      })
-    }, 1000)
-
     this.initializeWrap()
+
+    let bgGeo = window.BackgroundGeolocation
+    bgGeo.on('location', (locationData, taskId) => {
+      console.log(locationData)
+      bgGeo.finish(taskId)
+    }, () => {
+      alert('geolocation error')
+    })
+    bgGeo.ready({
+      desiredAccuracy: 0,
+      distanceFilter: 10,
+      stationaryRadius: 50,
+      locationUpdateInterval: 1000,
+      fastestLocationUpdateInterval: 5000,
+
+      activityType: 'AutomotiveNavigation',
+      activityRecognitionInterval: 5000,
+      stopTimeout: 5,
+
+      debug: true,
+      stopOnTerminate: false,
+      startOnBoot: true
+    }, function (state) {
+      console.log('BackgroundGeolocation ready: ', state)
+
+      if (!state.enabled) {
+        bgGeo.start()
+      }
+    })
   },
   methods: {
     initializeWrap () {
@@ -37,10 +65,37 @@ export default {
           }
         }, 1000)
       }
+    },
+    logout () {
+      this.storage.remove('user_id')
+      this.$router.push({name: 'welcome'})
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
+.main {
+  background: url(../assets/mainpage.png);
+  background-size: 100% auto;
+  height: 100vh;
+}
+
+.toolbar {
+  z-index: 1000;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  div {
+    width: calc(100% / 4);
+    img {
+      width: 100%;
+    }
+    float: left;
+    &:hover {
+      opacity: 0.6;
+    }
+  }
+}
 </style>

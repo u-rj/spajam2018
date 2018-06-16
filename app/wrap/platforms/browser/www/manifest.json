@@ -1,13 +1,12 @@
 {
   "background_color": "#FFF",
   "display": "standalone",
-  "name": "STARMINE",
-  "short_name": "STARMINE",
+  "name": "SPAJAM",
+  "short_name": "SPAJAM",
   "version": "jp.starmine.starmine",
   "description": "Project Description",
   "author": "Project Author",
   "icons": [],
   "orientation": "portrait",
-  "start_url": "index.html",
-  "theme_color": "#FFFFFF"
+  "start_url": "index.html"
 }

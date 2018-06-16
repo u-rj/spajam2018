@@ -2,6 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Welcome from '@/page/Welcome'
 import Main from '@/page/Main'
+import Match from '@/page/Match'
+import Area from '@/page/Area'
 import Mock from '@/page/Mock'
 
 Vue.use(Router)
@@ -25,6 +27,16 @@ let router = new Router({
       path: '/main',
       name: 'main',
       component: Main
+    },
+    {
+      path: '/match',
+      name: 'match',
+      component: Match
+    },
+    {
+      path: '/area',
+      name: 'area',
+      component: Area
     },
     {
       path: '/mock',

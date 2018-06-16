@@ -38,7 +38,7 @@ function start () {
 /* ------------------
  * deviceready
 ------------------- */
-window.$http.defaults.baseURL = 'https://front-dot-starmine-dev.appspot.com/api/'
+window.$http.defaults.baseURL = 'https://jymes7a0pa.execute-api.ap-northeast-1.amazonaws.com/api/'
 /*
 window.facebookAppId = '153582438774039'
 window.debugMode = true

@@ -67,6 +67,14 @@ button[disabled] {
   opacity: 0.4 !important;
 }
 
+input {
+  user-select: auto;
+}
+
+img {
+  display: block;
+}
+
 .pswp__button--close {
   background-image: url(assets/modal-close-button.png) !important;
   background-size: 44px !important;

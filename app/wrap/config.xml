@@ -25,19 +25,31 @@
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
     </platform>
-    <plugin name="cordova-plugin-whitelist" spec="1" />
+    <plugin name="cordova-plugin-whitelist" spec="^1.3.3" />
     <plugin name="cordova-plugin-inappbrowser" spec="^2.0.2" />
-    <plugin name="cordova-plugin-statusbar" spec="^2.4.1" />
-    <plugin name="cordova-plugin-cache-clear" spec="^1.3.7" />
+    <plugin name="cordova-plugin-statusbar" spec="~2.4.1" />
+    <plugin name="cordova-plugin-cache-clear" spec="~1.3.7" />
     <plugin name="cordova-plugin-customurlscheme" spec="^4.3.0">
         <variable name="URL_SCHEME" value="starmine" />
     </plugin>
-    <plugin name="cordova-plugin-dialogs" spec="^2.0.1" />
-    <plugin name="cordova-plugin-app-version" spec="^0.1.9" />
-    <plugin name="cordova-plugin-app-preferences" spec="^0.99.3" />
+    <preference name="StatusBarOverlaysWebView" value="false" />
+    <preference name="StatusBarStyle" value="default" />
+    <plugin name="cordova-plugin-dialogs" spec="~2.0.1" />
+    <plugin name="cordova-plugin-app-version" spec="~0.1.9" />
+    <plugin name="cordova-plugin-app-preferences" spec="~0.99.3" />
     <plugin name="cordova-plugin-splashscreen" spec="~5.0.2" />
-    <plugin name="cordova-plugin-actionsheet" spec="^2.3.3" />
-    <plugin name="org.apache.cordova.geolocation" spec="^0.3.6" />
+    <plugin name="cordova-plugin-actionsheet" spec="~2.3.3" />
+    <plugin name="cordova-plugin-geolocation" spec="^4.0.1" />
+    <feature name="Geolocation">
+        <param name="ios-package" value="CDVLocation" />
+    </feature>
+    <plugin name="cordova-background-geolocation-lt" spec="^2.12.2">
+        <variable name="BACKGROUND_MODE_LOCATION" value="&lt;string&gt;location&lt;/string&gt;" />
+        <variable name="LOCATION_ALWAYS_AND_WHEN_IN_USE_USAGE_DESCRIPTION" value="Always use is required for constant background location-tracking" />
+        <variable name="LOCATION_ALWAYS_USAGE_DESCRIPTION" value="Background location-tracking is required" />
+        <variable name="LOCATION_WHEN_IN_USE_USAGE_DESCRIPTION" value="Background location-tracking is required" />
+        <variable name="MOTION_USAGE_DESCRIPTION" value="Using the accelerometer increases battery-efficiency by intelligently toggling location-tracking only when the device is detected to be moving" />
+    </plugin>
     <engine name="browser" spec="^5.0.3" />
     <engine name="ios" spec="^4.5.4" />
 </widget>

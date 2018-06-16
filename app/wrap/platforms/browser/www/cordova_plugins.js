@@ -98,6 +98,27 @@ module.exports = [
         "id": "cordova-plugin-statusbar.StatusBarProxy",
         "pluginId": "cordova-plugin-statusbar",
         "runs": true
+    },
+    {
+        "file": "plugins/cordova-plugin-background-fetch/www/BackgroundFetch.js",
+        "id": "cordova-plugin-background-fetch.BackgroundFetch",
+        "pluginId": "cordova-plugin-background-fetch",
+        "clobbers": [
+            "window.BackgroundFetch"
+        ]
+    },
+    {
+        "file": "plugins/cordova-background-geolocation-lt/www/BackgroundGeolocation.js",
+        "id": "cordova-background-geolocation-lt.BackgroundGeolocation",
+        "pluginId": "cordova-background-geolocation-lt",
+        "clobbers": [
+            "window.BackgroundGeolocation"
+        ]
+    },
+    {
+        "file": "plugins/cordova-background-geolocation-lt/www/API.js",
+        "id": "cordova-background-geolocation-lt.API",
+        "pluginId": "cordova-background-geolocation-lt"
     }
 ];
 module.exports.metadata = 
@@ -113,7 +134,9 @@ module.exports.metadata =
     "cordova-plugin-splashscreen": "5.0.2",
     "cordova-plugin-statusbar": "2.4.1",
     "cordova-plugin-whitelist": "1.3.3",
-    "org.apache.cordova.geolocation": "0.3.6"
+    "cordova-plugin-geolocation": "4.0.1",
+    "cordova-plugin-background-fetch": "5.4.1",
+    "cordova-background-geolocation-lt": "2.12.2"
 }
 // BOTTOM OF METADATA
 });
