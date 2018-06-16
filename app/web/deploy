@@ -3,17 +3,3 @@ rm -rf ../wrap/platforms/ios/www/index.html
 rm -rf ../wrap/platforms/ios/www/static
 cp -R ../wrap/www/index.html ../wrap/platforms/ios/www/
 cp -R ../wrap/www/static ../wrap/platforms/ios/www/
-sed -i '' -e 's/>100/>/' ../wrap/platforms/ios/STARMINE/STARMINE-Info.plist
-sed -i '' -e 's/>200/>/' ../wrap/platforms/ios/STARMINE/STARMINE-Info.plist
-sed -i '' -e 's/>\([0-9]*\)\.\([0-9]*\)\.\([0-9]*\).*</>100\1.\2.\3</' ../wrap/platforms/ios/STARMINE/STARMINE-Info.plist
-cd ../wrap/platforms/ios/
-#dg deploy --user STARMINE --disable_notify
-expect -c "
-spawn dg deploy --disable_notify
-expect \"\? \"
-send \"1\n\"
-expect \"Please\"
-send \"1\n\"
-interact
-"
-cd ../../../web

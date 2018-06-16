@@ -39,6 +39,7 @@ function start () {
  * deviceready
 ------------------- */
 window.$http.defaults.baseURL = 'https://front-dot-starmine-dev.appspot.com/api/'
+/*
 window.facebookAppId = '153582438774039'
 window.debugMode = true
 window.apiMode = 'dev'
@@ -70,9 +71,9 @@ if (window.wrapMode) {
     // }
   }, false)
 } else {
-  start()
 }
-
+*/
+start()
 /* ------------------
  * scheme handler
 ------------------- */

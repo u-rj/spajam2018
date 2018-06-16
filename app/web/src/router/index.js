@@ -1,11 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Dev from '@/page/Dev'
 import Welcome from '@/page/Welcome'
 import Main from '@/page/Main'
-import LoginSns from '@/page/LoginSns'
-import Login from '@/page/Login'
-import CreateUser from '@/page/CreateUser'
+import Mock from '@/page/Mock'
 
 Vue.use(Router)
 
@@ -16,17 +13,8 @@ let router = new Router({
       name: 'root',
       component: Welcome,
       beforeEnter: (to, from, next) => {
-        if (location.port === '10800') {
-          next({name: 'dev'})
-        } else {
-          next({name: 'main'})
-        }
+        next({name: 'main'})
       }
-    },
-    {
-      path: '/dev',
-      name: 'dev',
-      component: Dev
     },
     {
       path: '/welcome',
@@ -39,41 +27,21 @@ let router = new Router({
       component: Main
     },
     {
-      path: '/login-sns',
-      name: 'login-sns',
-      component: LoginSns
-    },
-    {
-      path: '/login',
-      name: 'login',
-      component: Login
-    },
-    {
-      path: '/create-user',
-      name: 'create-user',
-      component: CreateUser
+      path: '/mock',
+      name: 'mock',
+      component: Mock
     }
   ]
 })
 
 router.beforeEach((to, from, next) => {
   console.log('router before', to.name, from.name)
-  if (to.name === 'dev') {
+  if (to.name === 'welcome') {
     next()
     return
   }
 
-  if (to.name === 'login') {
-    next()
-    return
-  }
-
-  if (to.name === 'create-user') {
-    next()
-    return
-  }
-
-  if (to.name !== 'welcome' && !window.storage.get('code')) {
+  if (to.name !== 'welcome' && !window.storage.get('user_id')) {
     next({name: 'welcome'})
     return
   }

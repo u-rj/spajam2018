@@ -3,102 +3,22 @@ import Store from 'store'
 
 export default {
   install: (Vue) => {
-    // Common
-    // Object.prototype.forEach = function(f){var s=this;Object.keys(s).forEach(function(v){f(s[v],v)})}
-    /* eslint-disable no-extend-native */
-    /*
-    Object.prototype.forEach = (f) => {
-      Object.keys(this).forEach((v) => {
-        f(this[v], v)
-      })
-    }
-    */
-
-    window.log = (...arg) => {
-      console.log(...arg)
-      window.displayLog.set(...arg)
-    }
-
-    window.displayLogElement = document.createElement('div')
-    // window.displayLogElement.style = 'background:black; opacity:0; position:fixed; left: 0; bottom:0; width:100%; height:10px; overflow:scroll; padding: 10px'
-
-    window.displayLogInputElement = document.createElement('input')
-    // window.displayLogInputElement.style = 'display:block; width:100%; background: black; color:white'
-    window.displayLogInputElement.addEventListener('keypress', (event) => {
-      if (event.keyCode !== 13) {
-        return false
-      }
-      /* eslint-disable no-eval */
-      window.log(eval(window.displayLogInputElement.value))
-      window.displayLogInputElement.value = ''
-    }, false)
-    window.displayLogElement.appendChild(window.displayLogInputElement)
-
-    window.displayLogMessageElement = document.createElement('div')
-    // window.displayLogMessageElement.style = 'color:white; font-size:11px;'
-    window.displayLogMessageElement.addEventListener('click', () => {
-      window.displayLog.close()
-    }, false)
-    window.displayLogElement.addEventListener('click', () => {
-      window.displayLog.open()
-    }, false)
-    window.displayLogElement.appendChild(window.displayLogMessageElement)
-
-    window.displayLogButtonElement = document.createElement('button')
-    window.displayLogButtonElement.innerHTML = 'Clear'
-    window.displayLogButtonElement.addEventListener('click', () => {
-      window.displayLog.clear()
-    }, false)
-    window.displayLogElement.appendChild(window.displayLogButtonElement)
-    // document.body.appendChild(window.displayLogElement)
-    window.displayLog = {
-      set (...arg) {
-        let text = ''
-        arg.forEach((value) => {
-          if (typeof value === 'function') {
-            text += value.toString().replace(/\r?\n/g, '<br>').replace(/\s/g, '&nbsp;') + ' '
-            return
-          }
-          let cache = []
-          text += JSON.stringify(value, (key, value) => {
-            if (typeof value === 'object' && value !== null) {
-              if (cache.indexOf(value) !== -1) {
-                return
-              }
-              cache.push(value)
-            }
-            return value
-          }) + ' '
-        })
-        window.displayLogMessageElement.insertAdjacentHTML('afterbegin', text + '<br>')
-      },
-      setError (...arg) {
-        let text = ''
-        arg.forEach((value) => {
-          text += JSON.stringify(value) + ' '
-        })
-        window.displayLogMessageElement.insertAdjacentHTML('afterbegin', '<span style="color:red">' + text + '</span><br>')
-      },
-      open () {
-        window.displayLogElement.style.opacity = 1
-        window.displayLogElement.style.height = '200px'
-      },
-      close () {
-        window.displayLogElement.style.opacity = 0
-        window.displayLogElement.style.height = '10px'
-      },
-      clear () {
-        window.displayLogMessageElement.innerHTML = ''
-      }
-    }
-
-    window.onerror = function (msg, url, linenumber) {
-      // alert('Error message: ' + msg + '\nURL: ' + url + '\nLine Number: ' + linenumber)
-      return false
-    }
-
     // Storage
     Vue.prototype.storage = window.storage = Store
+
+    Vue.prototype.$mock = window.$http = (url, params) => {
+      return new Promise((resolve, reject) => {
+        console.log('Request', params)
+        if (url === '/api/user/create') {
+          resolve({
+            type: 'success',
+            user_id: 4582956710410583
+          })
+        }
+
+        reject(new Error('something bad happened'))
+      })
+    }
 
     // Axios
     Vue.prototype.$http = window.$http = Axios.create({
