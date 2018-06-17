@@ -14,6 +14,22 @@ export default {
             type: 'success',
             user_id: 4582956710410583
           })
+        } else if (url === '/api/info') {
+          resolve({
+            'type': 'success',
+            'matches': [
+              {
+                'user_name': 'myms-kitchen',
+                'tune_title': 'ここだけのはなし',
+                'tune_srtist': 'チャットモンチー'
+              },
+              {
+                'user_name': 'myms-kitchen',
+                'tune_title': 'ここだけのはなし',
+                'tune_srtist': 'チャットモンチー'
+              }
+            ]
+          })
         }
 
         reject(new Error('something bad happened'))

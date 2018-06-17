@@ -1,6 +1,5 @@
 <template>
   <div class="main">
-    {{position}}
     <div class="show-detail" @click="detail = true">
     </div>
 
@@ -22,41 +21,15 @@
 export default {
   data () {
     return {
-      position: '',
+      position: {
+        latitude: '',
+        longitude: ''
+      },
       detail: false
     }
   },
   mounted () {
     this.initializeWrap()
-
-    let bgGeo = window.BackgroundGeolocation
-    bgGeo.on('location', (locationData, taskId) => {
-      console.log(locationData)
-      bgGeo.finish(taskId)
-    }, () => {
-      alert('geolocation error')
-    })
-    bgGeo.ready({
-      desiredAccuracy: 0,
-      distanceFilter: 10,
-      stationaryRadius: 50,
-      locationUpdateInterval: 1000,
-      fastestLocationUpdateInterval: 5000,
-
-      activityType: 'AutomotiveNavigation',
-      activityRecognitionInterval: 5000,
-      stopTimeout: 5,
-
-      debug: true,
-      stopOnTerminate: false,
-      startOnBoot: true
-    }, function (state) {
-      console.log('BackgroundGeolocation ready: ', state)
-
-      if (!state.enabled) {
-        bgGeo.start()
-      }
-    })
   },
   methods: {
     initializeWrap () {
@@ -75,8 +48,10 @@ export default {
       }
     },
     logout () {
-      this.storage.remove('user_id')
-      this.$router.push({name: 'welcome'})
+      if (confirm('ログアウトしますか?')) {
+        this.storage.remove('user_id')
+        this.$router.push({name: 'welcome'})
+      }
     }
   }
 }
@@ -93,7 +68,7 @@ export default {
 }
 
 .main {
-  background: url(../assets/match.png);
+  background: url(../assets/match-event.png);
   background-size: 100% auto;
   height: 100vh;
 }
@@ -106,7 +81,7 @@ export default {
   position: absolute;
   top: 0;
   left: 0;
-  background: url(../assets/match-detail.png);
+  background: url(../assets/match-event-detail.png);
   background-size: 100% auto;
   height: 100vh;
   width: 100vw;
@@ -132,9 +107,6 @@ export default {
       width: 100%;
     }
     float: left;
-    &:hover {
-      opacity: 0.6;
-    }
   }
 }
 </style>

@@ -28,35 +28,6 @@ export default {
   },
   mounted () {
     this.initializeWrap()
-
-    let bgGeo = window.BackgroundGeolocation
-    bgGeo.on('location', (locationData, taskId) => {
-      console.log(locationData)
-      bgGeo.finish(taskId)
-    }, () => {
-      alert('geolocation error')
-    })
-    bgGeo.ready({
-      desiredAccuracy: 0,
-      distanceFilter: 10,
-      stationaryRadius: 50,
-      locationUpdateInterval: 1000,
-      fastestLocationUpdateInterval: 5000,
-
-      activityType: 'AutomotiveNavigation',
-      activityRecognitionInterval: 5000,
-      stopTimeout: 5,
-
-      debug: true,
-      stopOnTerminate: false,
-      startOnBoot: true
-    }, function (state) {
-      console.log('BackgroundGeolocation ready: ', state)
-
-      if (!state.enabled) {
-        bgGeo.start()
-      }
-    })
   },
   methods: {
     initializeWrap () {
@@ -75,8 +46,10 @@ export default {
       }
     },
     logout () {
-      this.storage.remove('user_id')
-      this.$router.push({name: 'welcome'})
+      if (confirm('ログアウトしますか?')) {
+        this.storage.remove('user_id')
+        this.$router.push({name: 'welcome'})
+      }
     }
   }
 }
@@ -85,11 +58,11 @@ export default {
 <style lang="scss" scoped>
 .slide-top {
   // transition: all .5s cubic-bezier(.55,0,.1,1);
-  transition: all .35s;
+  transition: all .24s;
 }
 .slide-top-enter, .slide-top-leave-active {
   // opacity: 0;
-  transform: translate(0, 100vh);
+  transform: translate(100vw, 0);
 }
 
 .main {
@@ -132,9 +105,6 @@ export default {
       width: 100%;
     }
     float: left;
-    &:hover {
-      opacity: 0.6;
-    }
   }
 }
 </style>

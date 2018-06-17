@@ -21,34 +21,64 @@ export default {
   mounted () {
     this.initializeWrap()
 
-    let bgGeo = window.BackgroundGeolocation
-    bgGeo.on('location', (locationData, taskId) => {
-      console.log(locationData)
-      bgGeo.finish(taskId)
-    }, () => {
-      alert('geolocation error')
+    this.$mock('/api/info', {
+      user_id: this.storage.get('user_id'),
+      latitude: 1,
+      longitude: 2,
+      tune_title: 'ここだけのはなし',
+      tune_artist: 'チャットモンチー'
+    }).then((response) => {
+      console.log(response)
+    }).catch((err) => {
+      console.log(err)
     })
-    bgGeo.ready({
-      desiredAccuracy: 0,
-      distanceFilter: 10,
-      stationaryRadius: 50,
-      locationUpdateInterval: 1000,
-      fastestLocationUpdateInterval: 5000,
 
-      activityType: 'AutomotiveNavigation',
-      activityRecognitionInterval: 5000,
-      stopTimeout: 5,
+    if (window.wrapMode) {
+      let bgGeo = window.BackgroundGeolocation
+      bgGeo.on('location', (locationData, taskId) => {
+        console.log(locationData)
+        alert(JSON.stringify(locationData))
+        this.position.latitude = locationData.coords.latitude
+        this.position.longitude = locationData.coords.longitude
 
-      debug: true,
-      stopOnTerminate: false,
-      startOnBoot: true
-    }, function (state) {
-      console.log('BackgroundGeolocation ready: ', state)
+        this.$mock('/api/info', {
+          user_id: this.storage.get('user_id'),
+          latitude: this.position.latitude,
+          longitude: this.position.longitude,
+          tune_title: 'ここだけのはなし',
+          tune_artist: 'チャットモンチー'
+        }).then((response) => {
+          console.log(response)
+        }).catch((err) => {
+          console.log(err)
+        })
 
-      if (!state.enabled) {
-        bgGeo.start()
-      }
-    })
+        bgGeo.finish(taskId)
+      }, () => {
+        alert('geolocation error')
+      })
+      bgGeo.ready({
+        desiredAccuracy: 0,
+        distanceFilter: 10,
+        stationaryRadius: 50,
+        locationUpdateInterval: 1000,
+        fastestLocationUpdateInterval: 5000,
+
+        activityType: 'AutomotiveNavigation',
+        activityRecognitionInterval: 5000,
+        stopTimeout: 5,
+
+        debug: true,
+        stopOnTerminate: false,
+        startOnBoot: true
+      }, function (state) {
+        console.log('BackgroundGeolocation ready: ', state)
+
+        if (!state.enabled) {
+          bgGeo.start()
+        }
+      })
+    }
   },
   methods: {
     initializeWrap () {
@@ -67,8 +97,10 @@ export default {
       }
     },
     logout () {
-      this.storage.remove('user_id')
-      this.$router.push({name: 'welcome'})
+      if (confirm('ログアウトしますか?')) {
+        this.storage.remove('user_id')
+        this.$router.push({name: 'welcome'})
+      }
     }
   }
 }
@@ -76,7 +108,7 @@ export default {
 
 <style lang="scss" scoped>
 .main {
-  background: url(../assets/mainpage.png);
+  background: url(../assets/home.png);
   background-size: 100% auto;
   height: 100vh;
 }
@@ -93,9 +125,6 @@ export default {
       width: 100%;
     }
     float: left;
-    &:hover {
-      opacity: 0.6;
-    }
   }
 }
 </style>
