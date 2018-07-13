@@ -34,6 +34,7 @@ export default {
     })
 
     if (window.wrapMode) {
+      /*
       let bgGeo = window.BackgroundGeolocation
       bgGeo.on('location', (locationData, taskId) => {
         console.log(locationData)
@@ -68,7 +69,7 @@ export default {
         activityRecognitionInterval: 5000,
         stopTimeout: 5,
 
-        debug: true,
+        debug: false,
         stopOnTerminate: false,
         startOnBoot: true
       }, function (state) {
@@ -78,6 +79,7 @@ export default {
           bgGeo.start()
         }
       })
+      */
     }
   },
   methods: {

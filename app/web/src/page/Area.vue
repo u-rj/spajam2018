@@ -66,7 +66,7 @@ export default {
 }
 
 .main {
-  background: url(../assets/area.png);
+  background: url(../assets/area-evented.png);
   background-size: 100% auto;
   height: 100vh;
 }

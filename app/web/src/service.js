@@ -30,6 +30,49 @@ export default {
               }
             ]
           })
+        } else if (url === '/api/area_popular') {
+          resolve({
+            areas: [
+              {
+                area_name: '渋谷',
+                latitude: 139.704616,
+                longitude: 35.691638,
+                ranking: [
+                  {
+                    tune_title: '曲タイトル1',
+                    tune_artist: 'アーティスト名2'
+                  },
+                  {
+                    tune_title: '曲タイトル2',
+                    tune_artist: 'アーティスト名2'
+                  },
+                  {
+                    tune_title: '曲タイトル3',
+                    tune_artist: 'アーティスト名3'
+                  }
+                ]
+              },
+              {
+                area_name: '渋谷',
+                latitude: 139.704616,
+                longitude: 35.691638,
+                ranking: [
+                  {
+                    tune_title: '曲タイトル1',
+                    tune_artist: 'アーティスト名2'
+                  },
+                  {
+                    tune_title: '曲タイトル2',
+                    tune_artist: 'アーティスト名2'
+                  },
+                  {
+                    tune_title: '曲タイトル3',
+                    tune_artist: 'アーティスト名3'
+                  }
+                ]
+              }
+            ]
+          })
         }
 
         reject(new Error('something bad happened'))
@@ -46,7 +89,7 @@ export default {
         return true
       },
       transformRequest: [(data, headers) => {
-        window.log('Service Log: $http Request', {data: data, headers: headers})
+        console.log('Service Log: $http Request', {data: data, headers: headers})
         headers.options = {}
         headers.options['Content-Type'] = 'application/json'
         headers.post['Content-Type'] = 'application/json'
@@ -69,7 +112,7 @@ export default {
         }
         */
 
-        window.log('Service Log: $http Response', {data: data, headers: headers})
+        console.log('Service Log: $http Response', {data: data, headers: headers})
         return data
       }],
       withCredentials: true

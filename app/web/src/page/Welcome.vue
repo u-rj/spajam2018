@@ -1,10 +1,9 @@
 <template>
   <div class="main">
-    <p class="message">SignUp</p>
-    <input placeholder="User Name" type="text" v-model="data.user_name">
-    <input placeholder="E-mail" type="email" v-model="data.email">
-    <input placeholder="Password" type="password" v-model="data.password">
-    <button v-if="!(!data.user_name || !data.email || !data.password)" @click="createUser">Sign Up</button>
+    <input class="input1" placeholder="あなたのお名前は？" type="text" v-model="data.user_name">
+    <input class="input2" placeholder="email@example.com" type="email" v-model="data.email">
+    <input class="input3" placeholder="パスワードを設定" type="password" v-model="data.password">
+    <button :disabled="!data.user_name || !data.email || !data.password" @click="createUser"></button>
   </div>
 </template>
 
@@ -39,9 +38,10 @@ export default {
       }
     },
     createUser () {
-      this.$mock('/api/user/create', this.data).then((response) => {
+      this.$http.get('/api/user/create', this.data).then((response) => {
         console.log(response)
-        this.storage.set('user_id', response.user_id)
+        let data = response.data
+        this.storage.set('user_id', data.id)
         this.$router.push({name: 'main'})
       }).catch((err) => {
         console.log(err)
@@ -53,29 +53,38 @@ export default {
 
 <style lang="scss" scoped>
 .main {
-  // background: url(../assets/signup.png);
-  // background-size: 100% auto;
-  // height: 100vh;
+  background: url(../assets/signup.png);
+  background-size: 100% auto;
+  height: 100vh;
 }
 .main {
-  padding: 90px 60px 0;
-}
-.message {
-  font-size: 40px;
-  font-weight: bold;
-  margin-bottom: 80px;
+  padding: 242px 40px 0;
 }
 input {
-  font-size: 20px;
-  margin-bottom: 15px;
+  font-size: 14px;
   border: none;
+  width: 100%;
+  background: transparent;
+  height: 18px;
 }
 input:focus {
   border-bottom: 2px solid gray;
 }
+.input1 {
+  margin-bottom: 90px;
+}
+.input2 {
+  margin-bottom: 90px;
+}
+.input3 {
+  margin-bottom: 50px;
+}
 button {
-  background: white;
-  color: gray;
-  font-weight: bold;
+  background: transparent;
+  width: 100%;
+  height: 50px;
+}
+button:disabled {
+  background: rgba(255,255,255,.8);
 }
 </style>

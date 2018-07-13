@@ -30,6 +30,12 @@ export default {
   },
   mounted () {
     this.initializeWrap()
+
+    this.$mock('/api/area_popular').then((response) => {
+      console.log(response)
+    }).catch((err) => {
+      console.log(err)
+    })
   },
   methods: {
     initializeWrap () {
